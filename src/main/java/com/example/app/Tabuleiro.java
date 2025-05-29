@@ -1,10 +1,12 @@
 package com.example.app;
 
 public class Tabuleiro {
-    int lihas = 10;
+    int linhas = 10;
     int colunas = 10;
 
+    validacaoDeMovimento()
+
     public void imprimeTabuleiro() {
-        
+
     }
 }
