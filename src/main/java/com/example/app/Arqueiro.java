@@ -1,18 +1,18 @@
 package com.example.app;
 
-public class Mago extends Personagens {
-   
-    public Mago(int linha, int coluna) {
+public class Arqueiro extends Personagens {
+    
+    public Arqueiro(int linha, int coluna) {
         super(linha, coluna);
 
         forcaAtaque = 10;
-        alcanceAtaque = 3;
-        forcaDefesa = 7;
+        alcanceAtaque = 5;
+        forcaDefesa = 5;
     }
 
     @Override
     public void defender() {
-        forcaDefesa = 7;
+        forcaDefesa = 5;
     }
 
     @Override
