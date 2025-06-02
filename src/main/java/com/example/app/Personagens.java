@@ -19,6 +19,24 @@ public abstract class Personagens {
         pontosDeVida = 100;
     }
 
+    public int getLinha() {
+        return linha;
+    }
+
+    public int getColuna() {
+        return coluna;
+    }
+
     public abstract void defender();
-    public abstract void calculoDeDano(int ataque);
+    
+    public void calculoDeDano(int ataque) {
+        if( forcaDefesa == 0 )
+            pontosDeVida -= ataque;
+        else if( forcaDefesa > ataque)
+                forcaDefesa -= ataque;
+            else {
+                pontosDeVida += (forcaDefesa-ataque);
+                forcaDefesa = 0;
+            }
+    }
 }
