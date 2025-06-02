@@ -3,21 +3,19 @@ import javax.swing.JOptionPane;
 
 public class menu {
     public static void main(String[] args){
-        int opcao = JOptionPane.showConfirmDialog(null, "Selecione o modo de jogo:", "Bem Vindo!", 0);
+        Object[] options = { "Jogar PvP", "Jogar PvE", "Sair do jogo" };
+        int opcao = JOptionPane.showOptionDialog(null, "BEM VINDO!", "Duelo de Personagens", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, options, options[2]);
+    
         switch (opcao) {
-            case 1:
-                System.out.println("Boa escolha");
+            case 0:
+                JOptionPane.showMessageDialog(null, "Tela PvP");
                 break;
-        
+            case 1:
+                JOptionPane.showMessageDialog(null, "Tela PvE");
+                break;
+
             default:
                 break;
         }
-        
-        System.out.println("Duelo de Presonagens");
-        
-        System.out.println("(1) Jogar PvP");
-        System.out.println("(2) Jogar PvE");
-        System.out.println("(3) Sair do jogo");
-        System.out.print(": ");
     }
 }

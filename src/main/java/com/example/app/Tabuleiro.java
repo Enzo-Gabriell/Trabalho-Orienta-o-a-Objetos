@@ -4,7 +4,7 @@ public class Tabuleiro {
     int linhas = 10;
     int colunas = 10;
 
-    validacaoDeMovimento()
+    //validacaoDeMovimento()
 
     public void imprimeTabuleiro() {
 
