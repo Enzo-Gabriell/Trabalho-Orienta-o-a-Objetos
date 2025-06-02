@@ -27,6 +27,15 @@ public abstract class Personagens {
         return coluna;
     }
 
+    public int atacar(int linha, int coluna) {
+        return validacaoDeAlcance(linha, coluna) ? forcaAtaque : 0;
+        
+    }
+
+    public boolean validacaoDeAlcance(int linha, int coluna) {
+        return alcanceAtaque < (coluna - this.coluna) || alcanceAtaque < (linha - this.linha);
+    }
+
     public abstract void defender();
     
     public void calculoDeDano(int ataque) {
