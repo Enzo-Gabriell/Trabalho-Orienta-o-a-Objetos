@@ -7,11 +7,17 @@ public class Mago extends Personagens {
 
         forcaAtaque = 10;
         alcanceAtaque = 3;
-        forcaDefesa = 7;
+        defesaBase = 7;
+    }
+
+    public int specialPower(int vidaOponente) {
+        int aux = pontosDeVida;
+        pontosDeVida = vidaOponente;
+        return aux;
     }
 
     @Override
-    public void defender() {
-        forcaDefesa = 7;
+    public void specialPower() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

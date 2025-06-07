@@ -7,11 +7,12 @@ public class Guerreiro extends Personagens {
 
         forcaAtaque = 15;
         alcanceAtaque = 1;
-        forcaDefesa = 10;
+        defesaBase = 10;
     }
 
     @Override
-    public void defender() {
-        forcaDefesa = 10;
+    public void specialPower() {
+        if(forcaAtaque == 15)
+            forcaAtaque *= 2;
     }
 }

@@ -7,6 +7,7 @@ public abstract class Personagens {
     int pontosDeVida;
     int forcaAtaque;
     int alcanceAtaque;
+    int defesaBase;
     int forcaDefesa;
     int linha;
     int coluna;
@@ -36,7 +37,9 @@ public abstract class Personagens {
         return alcanceAtaque < (coluna - this.coluna) || alcanceAtaque < (linha - this.linha);
     }
 
-    public abstract void defender();
+    public void defender() {
+        forcaDefesa = defesaBase;
+    }
     
     public void calculoDeDano(int ataque) {
         if( forcaDefesa == 0 )
@@ -48,4 +51,6 @@ public abstract class Personagens {
                 forcaDefesa = 0;
             }
     }
+
+    public abstract void specialPower();
 }

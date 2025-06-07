@@ -1,8 +1,6 @@
 package com.example.app;
 
 public class Tabuleiro {
-    int linhas = 10;
-    int colunas = 10;
 
     public boolean validacaoDeMovimento(Personagens p, char move) {
         if(move == 'C')
@@ -29,6 +27,8 @@ public class Tabuleiro {
     }
 
     public void imprimeTabuleiro() {
-
-    }
+        for(int i=0; i<10; i++) 
+            System.out.print(Character.toChars(i) + " ");
+        for(int i=0; i<10; i++)
+            System.out.println(i);
 }

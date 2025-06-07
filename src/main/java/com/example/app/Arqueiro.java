@@ -7,11 +7,11 @@ public class Arqueiro extends Personagens {
 
         forcaAtaque = 10;
         alcanceAtaque = 5;
-        forcaDefesa = 5;
+        defesaBase = 5;
     }
 
     @Override
-    public void defender() {
-        forcaDefesa = 5;
+    public void specialPower() {
+        alcanceAtaque++;
     }
 }
