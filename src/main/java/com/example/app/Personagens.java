@@ -53,4 +53,5 @@ public abstract class Personagens {
     }
 
     public abstract void specialPower();
+
 }
