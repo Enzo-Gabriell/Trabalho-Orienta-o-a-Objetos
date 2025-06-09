@@ -28,14 +28,15 @@ public class DesenhaTabuleiro extends JPanel {
                 g.fillRect(x, y, TAMANHO_CASA, TAMANHO_CASA);
             }
         }
+        
         for (int linha = 0; linha < NUM_CASAS; linha++) {
-            for (int colunas = 0; colunas < NUM_CASAS; colunas++) {
-                if (pieces[linha][colunas] != 0) {
-                    int x = colunas * TAMANHO_CASA + TAMANHO_CASA / 4;
+            for (int coluna = 0; coluna < NUM_CASAS; coluna++) {
+                if (pieces[linha][coluna] != 0) {
+                    int x = coluna * TAMANHO_CASA + TAMANHO_CASA / 4;
                     int y = linha * TAMANHO_CASA + TAMANHO_CASA / 4;
                     int size = TAMANHO_CASA / 2;
 
-                    if (pieces[linha][colunas] == 1) {
+                    if (pieces[linha][coluna] == 1) {
                         g.setColor(Color.BLACK);
                     } else {
                         g.setColor(Color.RED); // Peça "branca" como vermelha para contraste
