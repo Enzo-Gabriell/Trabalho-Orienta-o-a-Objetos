@@ -8,11 +8,13 @@ public final class Tabuleiro {
     public Tabuleiro(int linhas, int colunas) {
         this.linhas = linhas;
         this.colunas = colunas;
+        
+        this.grade = new Personagens[linhas][colunas];
     }
 
     public static void imprimeTabuleiro() {
         for(int i=0; i<10; i++) 
-            System.out.print(Character.toChars(i) + " ");
+            System.out.print((char)(i+65) + " ");
         for(int i=0; i<10; i++)
             System.out.println(i);
     }

@@ -2,13 +2,17 @@ package com.example.app;
 
 public class Mago extends Personagens {
    
-    public Mago(int linha, int coluna) {
+    public Mago(int linha, int coluna, boolean p1) {
         super(linha, coluna);
 
         forcaAtaque = 10;
         alcanceAtaque = 3;
         defesaBase = 7;
-    }
+        if(p1)
+            simbolo = 'M';
+        else
+            simbolo = 'm';        
+}
 
     public int specialPower(int vidaOponente) {
         int aux = pontosDeVida;
@@ -17,7 +21,9 @@ public class Mago extends Personagens {
     }
 
     @Override
-    public void specialPower() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void specialPower(Personagens alvo) {
+        int aux = pontosDeVida;
+        pontosDeVida = alvo.pontosDeVida;
+        alvo.pontosDeVida = aux;
     }
 }

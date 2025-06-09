@@ -11,9 +11,10 @@ public abstract class Personagens {
     int forcaDefesa;
     int linha;
     int coluna;
+    char simbolo;
 
     public Personagens(int linha, int coluna) {
-        this.linha = linha;
+        this.linha = linha; 
         this.coluna = coluna;
 
         nome = JOptionPane.showInputDialog("Digite o nome do personagem: ");
@@ -27,14 +28,14 @@ public abstract class Personagens {
     public int getColuna() {
         return coluna;
     }
-
-    public int atacar(int linha, int coluna) {
-        return validacaoDeAlcance(linha, coluna) ? forcaAtaque : 0;
-        
+    
+    public char getSimbolo() {
+        return simbolo;
     }
 
-    public boolean validacaoDeAlcance(int linha, int coluna) {
-        return alcanceAtaque < (coluna - this.coluna) || alcanceAtaque < (linha - this.linha);
+    public int atacar() {
+        return forcaAtaque;
+        
     }
 
     public void defender() {
@@ -52,6 +53,5 @@ public abstract class Personagens {
             }
     }
 
-    public abstract void specialPower();
-
+    public abstract void specialPower(Personagens alvo);
 }
