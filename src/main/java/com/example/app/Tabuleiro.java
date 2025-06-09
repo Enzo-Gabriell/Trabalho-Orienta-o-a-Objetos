@@ -12,28 +12,50 @@ public final class Tabuleiro {
         this.grade = new Personagens[linhas][colunas];
     }
 
-    public static void imprimeTabuleiro() {
-        for(int i=0; i<10; i++) 
-            System.out.print((char)(i+65) + " ");
+    public void imprimeTabuleiro() {
+        System.out.println("\n====== TABULEIRO ATUAL ======");
         for(int i=0; i<10; i++)
-            System.out.println(i);
+            System.out.print("  " + i);  
+        for(int i=0; i<10; i++) {
+            System.out.println();
+            System.out.print(i);
+            for(int j=0; j<10; j++)
+                if(grade[i][j] != null)
+                    System.out.print("  " + grade[i][j].getSimbolo());
+                else
+                    System.out.print("   ");
+        }
+        System.out.println();
     }
 
     public boolean validacaoDeMovimento(Personagens p, char move) { // falta cuidar para p1 e p2 não ficarem "juntos" em uma casa    
-        if(move == 'C') // mudar para switch?
-            return p.linha < 9;
-        if(move == 'B')
-            return p.linha > 0;
-        if(move == 'D')
-            return p.coluna < 9;
-        if(move == 'E')
-            return p.coluna > 0;
-        return false;
+        int proximaLinha = p.getLinha();
+        int proximaColuna = p.getColuna();
+
+        switch (move) {
+        case 'C' -> proximaColuna++;
+        case 'B' -> proximaColuna--;
+        case 'D' -> proximaLinha++;
+        case 'E' -> proximaLinha--;
+        }
+        
+        if(proximaColuna > 9 || proximaColuna < 0 || proximaLinha > 9 || proximaLinha < 0)    
+            return false;
+        
+        if(grade[proximaLinha][proximaColuna] != null)
+            return false;
+
+        return true;
+    }
+
+    public void atualizaGrade(Personagens p, int linhaAntiga, int colunaAntiga) {
+        this.grade[linhaAntiga][colunaAntiga] = null;
+        this.grade[p.linha][p.coluna] = p;
     }
 
     public static boolean validaAlcance(Personagens p1, Personagens p2) {
         int max = Math.abs(p1.linha - p2.linha);
-        if(max < Math.abs(p1.coluna - p2.coluna));
+        if(max < Math.abs(p1.coluna - p2.coluna))
             max = Math.abs(p1.coluna - p2.coluna);
 
         return p1.alcanceAtaque >= max;

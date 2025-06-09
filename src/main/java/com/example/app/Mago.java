@@ -14,12 +14,6 @@ public class Mago extends Personagens {
             simbolo = 'm';        
 }
 
-    public int specialPower(int vidaOponente) {
-        int aux = pontosDeVida;
-        pontosDeVida = vidaOponente;
-        return aux;
-    }
-
     @Override
     public void specialPower(Personagens alvo) {
         int aux = pontosDeVida;

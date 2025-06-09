@@ -1,7 +1,5 @@
 package com.example.app;
 
-import javax.swing.JOptionPane;
-
 public abstract class Personagens {
     String nome;
     int pontosDeVida;
@@ -16,9 +14,9 @@ public abstract class Personagens {
     public Personagens(int linha, int coluna) {
         this.linha = linha; 
         this.coluna = coluna;
-
-        nome = JOptionPane.showInputDialog("Digite o nome do personagem: ");
-        pontosDeVida = 100;
+        System.out.print("Digite o nome do personagem: ");
+        this.nome = Jogo.sc.nextLine();
+        this.pontosDeVida = 100;
     }
 
     public int getLinha() {
@@ -51,6 +49,17 @@ public abstract class Personagens {
                 pontosDeVida += (forcaDefesa-ataque);
                 forcaDefesa = 0;
             }
+        if(pontosDeVida < 0)
+            pontosDeVida = 0;
+    }
+
+    public void mover(char direcao) {
+        switch (direcao) {
+            case 'C' -> coluna++;
+            case 'B' -> coluna--;
+            case 'D' -> linha++;
+            case 'E' -> linha--;
+        }
     }
 
     public abstract void specialPower(Personagens alvo);
