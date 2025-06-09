@@ -1,9 +1,9 @@
 package com.example.app;
 
 public final class Tabuleiro {
-    int linhas;
-    int colunas;
-    Personagens[][] grade; // para salvar a posição dos personagens
+    protected int linhas;
+    protected int colunas;
+    protected Personagens[][] grade; // para salvar a posição dos personagens
 
     public Tabuleiro(int linhas, int colunas) {
         this.linhas = linhas;

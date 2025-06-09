@@ -15,7 +15,7 @@ public class Guerreiro extends Personagens {
     }
 
     @Override
-    public void specialPower(Personagens alvo) {
+    protected void specialPower(Personagens alvo) {
         System.out.println(nome + " ativa Carga Brutal");
         if(forcaAtaque == 15)
             forcaAtaque *= 2;

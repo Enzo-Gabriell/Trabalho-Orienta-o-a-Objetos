@@ -3,9 +3,9 @@ package com.example.app;
 import java.util.Scanner;
 
 public class Jogo {
-    Tabuleiro tabuleiro;
-    Personagens player1;
-    Personagens player2;
+    protected Tabuleiro tabuleiro;
+    protected Personagens player1;
+    protected Personagens player2;
     static Scanner sc = new Scanner(System.in);
 
     public Jogo () {
@@ -73,7 +73,7 @@ public class Jogo {
         }
     }
 
-    public Personagens inicializaPlayer(char personagem, boolean p1) {
+    protected Personagens inicializaPlayer(char personagem, boolean p1) {
         Personagens player;
         int linha, coluna;
 
@@ -94,13 +94,13 @@ public class Jogo {
 
     }
 
-    public int gera() { // gera um número aleatório de 0 a 10 para posições dos personagens
+    protected int gera() { // gera um número aleatório de 0 a 10 para posições dos personagens
         int num = (int)(Math.random() * tabuleiro.getLinhas());
 
         return num;
     }
 
-    public void andar(Personagens p) {
+    protected void andar(Personagens p) {
         char move;
         
         do {
@@ -125,7 +125,7 @@ public class Jogo {
             System.out.println("Movimento inválido!!");
     }
 
-    public void atacar(Personagens p1, Personagens p2) {
+    protected void atacar(Personagens p1, Personagens p2) {
         if(Tabuleiro.validaAlcance(p1, p2)) {
             System.out.println();
             System.out.println(p1.nome + " ataca " + p2.nome);
@@ -134,7 +134,7 @@ public class Jogo {
         }
     }
 
-    public void specialPower(Personagens atacante, Personagens alvo) {
+    protected void specialPower(Personagens atacante, Personagens alvo) {
         alvo.calculoDeDano(atacante.atacar());
     }
 }
