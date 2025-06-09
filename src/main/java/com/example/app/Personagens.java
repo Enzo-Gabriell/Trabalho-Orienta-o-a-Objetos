@@ -1,15 +1,15 @@
 package com.example.app;
 
 public abstract class Personagens {
-    String nome;
-    int pontosDeVida;
-    int forcaAtaque;
-    int alcanceAtaque;
-    int defesaBase;
-    int forcaDefesa;
-    int linha;
-    int coluna;
-    char simbolo;
+    protected String nome;
+    protected int pontosDeVida;
+    protected int forcaAtaque;
+    protected int alcanceAtaque;
+    protected int defesaBase;
+    protected int forcaDefesa;
+    protected int linha;
+    protected int coluna;
+    protected char simbolo;
 
     public Personagens(int linha, int coluna) {
         this.linha = linha; 
@@ -19,48 +19,55 @@ public abstract class Personagens {
         this.pontosDeVida = 100;
     }
 
-    public int getLinha() {
+    protected int getLinha() {
         return linha;
     }
 
-    public int getColuna() {
+    protected int getColuna() {
         return coluna;
     }
     
-    public char getSimbolo() {
+    protected char getSimbolo() {
         return simbolo;
     }
 
-    public int atacar() {
-        return forcaAtaque;
-        
+    protected int atacar() {
+        return forcaAtaque; 
     }
 
-    public void defender() {
+    protected void defender() {
+        System.out.println(nome + " restaura força de defesa para " + defesaBase);
         forcaDefesa = defesaBase;
     }
     
-    public void calculoDeDano(int ataque) {
-        if( forcaDefesa == 0 )
+    protected void calculoDeDano(int ataque) {
+        if( forcaDefesa == 0 ) {
+            System.out.println(nome + " recebe " + ataque + " de dano!");
             pontosDeVida -= ataque;
-        else if( forcaDefesa > ataque)
-                forcaDefesa -= ataque;
-            else {
-                pontosDeVida += (forcaDefesa-ataque);
-                forcaDefesa = 0;
-            }
+        }
+        else if( forcaDefesa > ataque) {
+            System.out.println(nome + " perde " + (forcaDefesa-ataque) + " de defesa!");
+            forcaDefesa -= ataque;
+        }
+        else {
+            System.out.println(nome + " recebe " + (ataque-forcaDefesa) + " de dano!");
+            pontosDeVida += (forcaDefesa-ataque);
+            forcaDefesa = 0;
+        }
+
         if(pontosDeVida < 0)
             pontosDeVida = 0;
+        System.out.println();
     }
 
-    public void mover(char direcao) {
+    protected void mover(char direcao) {
         switch (direcao) {
-            case 'C' -> coluna++;
-            case 'B' -> coluna--;
-            case 'D' -> linha++;
-            case 'E' -> linha--;
+            case 'C' -> linha--; // trocados pois tabuleiro é
+            case 'B' -> linha++; // impresso invertido
+            case 'D' -> coluna++;
+            case 'E' -> coluna--;
         }
     }
 
-    public abstract void specialPower(Personagens alvo);
+    protected abstract void specialPower(Personagens alvo);
 }
