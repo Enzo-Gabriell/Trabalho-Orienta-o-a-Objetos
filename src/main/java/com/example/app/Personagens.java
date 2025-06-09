@@ -55,10 +55,10 @@ public abstract class Personagens {
 
     public void mover(char direcao) {
         switch (direcao) {
-            case 'C' -> coluna++;
-            case 'B' -> coluna--;
-            case 'D' -> linha++;
-            case 'E' -> linha--;
+            case 'C' -> linha++;
+            case 'B' -> linha--;
+            case 'D' -> coluna++;
+            case 'E' -> coluna--;
         }
     }
 
