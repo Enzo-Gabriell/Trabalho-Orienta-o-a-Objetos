@@ -40,10 +40,11 @@ public class Jogo {
         while(true) {
             game.tabuleiro.imprimeTabuleiro();
             
+            game.tabuleiro.imprimeSituacao(game.player1, game.player2);
+
             int acao;
             System.out.println("Player1 Escolha atacar(1), defender(2), andar(3) ou special(4)");
-            acao = sc.nextInt(); 
-            sc.nextLine();
+            acao = Integer.parseInt(sc.nextLine()); 
             switch (acao) {
                 case 1 -> game.atacar(game.player1, game.player2);
                 case 2 -> game.player1.defender();
@@ -103,9 +104,9 @@ public class Jogo {
         char move;
         
         do {
-            System.out.println("Pra qual direção? cima(C), baix(B), direita(D) ou esquerda(E)");
-            move = sc.next().charAt(0);
-            sc.nextLine();
+            System.out.println("Pra qual direção? cima(C), baixo(B), direita(D) ou esquerda(E)");
+            move = sc.nextLine().charAt(0);
+            System.out.println();
 
             if(move != 'C' && move != 'B' && move != 'D' && move != 'E')
                 System.out.println("Opção inválida, tente novamente");
@@ -125,8 +126,12 @@ public class Jogo {
     }
 
     public void atacar(Personagens p1, Personagens p2) {
-        if(Tabuleiro.validaAlcance(p1, p2))
+        if(Tabuleiro.validaAlcance(p1, p2)) {
+            System.out.println();
+            System.out.println(p1.nome + " ataca " + p2.nome);
+            System.out.println();
             p2.calculoDeDano(p1.atacar());
+        }
     }
 
     public void specialPower(Personagens atacante, Personagens alvo) {

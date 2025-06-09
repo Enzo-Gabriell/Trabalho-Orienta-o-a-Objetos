@@ -16,6 +16,7 @@ public class Arqueiro extends Personagens {
 
     @Override
     public void specialPower(Personagens alvo) {
+        System.out.println(nome + " ativa Flecha Precisa");
         alcanceAtaque++;
     }
 }

@@ -37,26 +37,34 @@ public abstract class Personagens {
     }
 
     public void defender() {
+        System.out.println(nome + " restaura força de defesa para " + defesaBase);
         forcaDefesa = defesaBase;
     }
     
     public void calculoDeDano(int ataque) {
-        if( forcaDefesa == 0 )
+        if( forcaDefesa == 0 ) {
+            System.out.println(nome + " recebe " + ataque + " de dano!");
             pontosDeVida -= ataque;
-        else if( forcaDefesa > ataque)
-                forcaDefesa -= ataque;
-            else {
-                pontosDeVida += (forcaDefesa-ataque);
-                forcaDefesa = 0;
-            }
+        }
+        else if( forcaDefesa > ataque) {
+            System.out.println(nome + " perde " + (forcaDefesa-ataque) + " de defesa!");
+            forcaDefesa -= ataque;
+        }
+        else {
+            System.out.println(nome + " recebe " + (ataque-forcaDefesa) + " de dano!");
+            pontosDeVida += (forcaDefesa-ataque);
+            forcaDefesa = 0;
+        }
+
         if(pontosDeVida < 0)
             pontosDeVida = 0;
+        System.out.println();
     }
 
     public void mover(char direcao) {
         switch (direcao) {
-            case 'C' -> linha++;
-            case 'B' -> linha--;
+            case 'C' -> linha--; // trocados pois tabuleiro é
+            case 'B' -> linha++; // impresso invertido
             case 'D' -> coluna++;
             case 'E' -> coluna--;
         }

@@ -16,6 +16,7 @@ public class Mago extends Personagens {
 
     @Override
     public void specialPower(Personagens alvo) {
+        System.out.println(nome + " ativa Trocar vida");
         int aux = pontosDeVida;
         pontosDeVida = alvo.pontosDeVida;
         alvo.pontosDeVida = aux;
