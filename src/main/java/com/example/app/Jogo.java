@@ -66,6 +66,25 @@ public class Jogo {
         this.player2 = inicializaPlayer(tipoPersonagem, false);
     }
 
+    protected int telaInical(){
+        int acao;
+        System.out.println("\u001b[1m Duelo de Personagens! \u001b[0m");
+        System.out.print("Jogar PvP(1) Jogar PvE(2) Sair do Jogo(3): ");
+        do{
+            try {
+                acao = Integer.parseInt(sc.nextLine());
+                if(acao != 1 && acao != 2 && acao != 3)
+                    System.out.print("Opção inválida. Tente novamente: ");
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Entrada inálida. Tente novamente: ");
+                acao = 0;
+            }
+            
+        }while(acao != 1 && acao != 2 && acao != 3);
+        return acao;
+    }
+
     protected Personagens inicializaPlayer(char personagem, boolean p1) {
         Personagens player;
         int linha, coluna;
