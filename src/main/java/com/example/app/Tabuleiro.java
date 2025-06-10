@@ -18,9 +18,12 @@ public final class Tabuleiro {
 
     public void imprimeTabuleiro() {
         System.out.println("\n======= TABULEIRO ATUAL =======");
+        
         for(int i=0; i<this.colunas; i++)
-            System.out.print("  " + i);  
-        for(int i=0; i<this.linhas; i++) {
+            System.out.print("  " + i);
+        
+        for(int i=0; i<this.linhas; i++) 
+        {
             System.out.println();
             System.out.print(i);
             for(int j=0; j<this.colunas; j++)
@@ -34,11 +37,15 @@ public final class Tabuleiro {
 
     public void imprimeSituacao(Personagens p1, Personagens p2) {
         System.out.println();
-        System.out.println("----PLAYER 1----");
+        System.out.println("----" + p1.nome + "----");
         System.out.println("Vida: " + p1.pontosDeVida);
+        System.out.println("Dano de ataque: " + p1.forcaAtaque);
+        System.out.println("Escudo: " + p1.forcaDefesa);
         System.out.println();
-        System.out.println("----PLAYER 2----");
+        System.out.println("----" + p2.nome + "----");
         System.out.println("Vida: " + p2.pontosDeVida);
+        System.out.println("Dano de ataque: " + p2.forcaAtaque);
+        System.out.println("Escudo: " + p2.forcaDefesa);
         System.out.println();
     }
 

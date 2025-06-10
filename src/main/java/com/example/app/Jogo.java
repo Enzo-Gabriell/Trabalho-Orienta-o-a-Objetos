@@ -8,29 +8,27 @@ public class Jogo {
     protected Personagens player2;
     static Scanner sc = new Scanner(System.in);
 
+    private char selecionaPersonagem(){
+        char tipoPersonagem;
+        System.out.print("Escolha o tipo de personagem, Mago(M), Guerreiro(G) e Arqueiro(A): ");
+        do {
+            tipoPersonagem = sc.next().charAt(0);
+            sc.nextLine();
+
+            if(tipoPersonagem != 'M' && tipoPersonagem != 'm' &&  tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a')
+                System.out.print("Opção inválida, tente novamente: ");
+        } while(tipoPersonagem != 'M' && tipoPersonagem != 'm' &&  tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a');
+        return tipoPersonagem;
+    }
+
     public Jogo () {
         this.tabuleiro = new Tabuleiro(10, 10);
 
         char tipoPersonagem;
-        System.out.println("Escolha o tipo de personagem, Mago(M), Guerreiro(G) e Arqueiro(A)");
-        do {
-            tipoPersonagem = sc.next().charAt(0);
-            sc.nextLine();
-
-            if(tipoPersonagem != 'M' && tipoPersonagem != 'G' && tipoPersonagem != 'A')
-                System.out.println("Opção inválida, tente novamente!!!");
-        } while(tipoPersonagem != 'M' && tipoPersonagem != 'G' && tipoPersonagem != 'A');
-        
+        tipoPersonagem = selecionaPersonagem();
         this.player1 = inicializaPlayer(tipoPersonagem, true);
 
-        System.out.println("Escolha o tipo de personagem, Mago(M), Guerreiro(G) e Arqueiro(A)");
-        do {
-            tipoPersonagem = sc.next().charAt(0);
-            sc.nextLine();
-
-            if(tipoPersonagem != 'M' && tipoPersonagem != 'G' && tipoPersonagem != 'A')
-                System.out.println("Opção inválida, tente novamente!!!");
-        } while(tipoPersonagem != 'M' && tipoPersonagem != 'G' && tipoPersonagem != 'A');
+        tipoPersonagem = selecionaPersonagem();
         this.player2 = inicializaPlayer(tipoPersonagem, false);
     }
 
@@ -43,7 +41,8 @@ public class Jogo {
             game.tabuleiro.imprimeSituacao(game.player1, game.player2);
 
             int acao;
-            System.out.println("Player1 Escolha atacar(1), defender(2), andar(3) ou special(4)");
+            System.out.println("Turno de " + game.player1.nome + ":");
+            System.out.print("Atacar(1) Defender(2) Andar(3) Especial(4): ");
             acao = Integer.parseInt(sc.nextLine()); 
             switch (acao) {
                 case 1 -> game.atacar(game.player1, game.player2);
@@ -57,7 +56,8 @@ public class Jogo {
                 break;
             }
 
-            System.out.println("Player2 Escolha atacar(1), defender(2), andar(3) ou special(4)");
+            System.out.println("Turno de " + game.player2.nome + ":");
+            System.out.print("Atacar(1) Defender(2) Andar(3) Especial(4): ");
             acao = Integer.parseInt(sc.nextLine());
             switch (acao) {
                 case 1 -> game.atacar(game.player2, game.player1);
@@ -84,8 +84,11 @@ public class Jogo {
 
         switch (personagem) {
             case 'M' -> player = new Mago(linha, coluna, p1);
+            case 'm' -> player = new Mago(linha, coluna, p1);
             case 'G' -> player = new Guerreiro(linha, coluna, p1);
+            case 'g' -> player = new Guerreiro(linha, coluna, p1);
             case 'A' -> player = new Arqueiro(linha, coluna, p1);
+            case 'a' -> player = new Arqueiro(linha, coluna, p1);
             default -> player = null;
         }
         this.tabuleiro.grade[linha][coluna] = player;
