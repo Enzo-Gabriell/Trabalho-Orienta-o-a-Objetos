@@ -1,6 +1,6 @@
 package com.example.app;
 
-public class Bot {
+public class Bot { // responsavel pela lógica de decisão e movimentação do bot
 
     public int decideAcao(Personagens bot, Personagens player1) {
         if(bot.getSimbolo() == 'G' && !bot.isSpecialAtivo()) // caso o bot seja guerreio já ativa special de cara

@@ -1,6 +1,6 @@
 package com.example.app;
 
-public final class Tabuleiro {
+public final class Tabuleiro { // valida movimentação e alcance, além de imprimir tabuleiro e atualizações da vida e etc.
     private int linhas;
     private int colunas;
     private Personagens[][] grade; // para salvar a posição dos personagens
@@ -36,13 +36,9 @@ public final class Tabuleiro {
             for (int j = 0; j < this.colunas; j++)
                 if (grade[i][j] != null) {
                     if (grade[i][j].getIsPlayer1())
-                        System.out.print(" " + "\u001b[34m" + grade[i][j].getSimbolo() + "\u001b[0m" + " "); // coloca
-                                                                                                             // corzinha
-                                                                                                             // bonitinha
+                        System.out.print(" " + "\u001b[34m" + grade[i][j].getSimbolo() + "\u001b[0m" + " ");
                     else
-                        System.out.print(" " + "\u001b[31m" + grade[i][j].getSimbolo() + "\u001b[0m" + " "); // coloca
-                                                                                                             // corzinha
-                                                                                                             // bonitinha
+                        System.out.print(" " + "\u001b[31m" + grade[i][j].getSimbolo() + "\u001b[0m" + " ");
                 } else
                     System.out.print(" + ");
         }
@@ -62,8 +58,7 @@ public final class Tabuleiro {
         System.out.println();
     }
 
-    public boolean validacaoDeMovimento(Personagens p, char move) { // falta cuidar para p1 e p2 não ficarem "juntos" em
-                                                                    // uma casa
+    public boolean validacaoDeMovimento(Personagens p, char move) {
         int proximaLinha = p.getLinha();
         int proximaColuna = p.getColuna();
 

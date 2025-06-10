@@ -27,7 +27,7 @@ public class Jogo {
         }
         else {
             botControlador = new Bot();
-            int tipo = gera(3); // gerea numero aleatorio de 1 a 3, para selecionar personagem do bot
+            int tipo = gera(3); // gera numero aleatorio de 1 a 3, para selecionar personagem do bot
             if(tipo == 1)
                 player2 = inicializaPlayer('M', false, "Mata noob");
             else if(tipo == 2)
