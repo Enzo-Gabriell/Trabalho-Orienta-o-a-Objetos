@@ -3,7 +3,7 @@ package com.example.app;
 public class Mago extends Personagens {
 
     public Mago(int linha, int coluna, boolean p1) {
-        super(linha, coluna, 10, 3, 7, p1 ? 'M' : 'm');
+        super(linha, coluna, 10, 3, 7, p1, 'M');
     }
 
     @Override
@@ -13,6 +13,7 @@ public class Mago extends Personagens {
             int aux = getPontosDeVida();
             setPontosDeVida(alvo.getPontosDeVida());
             alvo.setPontosDeVida(aux);
-        }
+        } else
+            System.out.println(getNome() + " já ativou Trocar vida nessa partida");
     }
 }

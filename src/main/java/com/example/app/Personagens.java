@@ -10,9 +10,11 @@ public abstract class Personagens {
     private int linha;
     private int coluna;
     private char simbolo;
+    private boolean p1;
     private boolean specialAtivo;
 
-    public Personagens(int linha, int coluna, int forcaAtaque, int alcanceAtaque, int defesaBase, char simbolo) {
+    public Personagens(int linha, int coluna, int forcaAtaque, int alcanceAtaque, int defesaBase, boolean p1,
+            char simbolo) {
         this.linha = linha;
         this.coluna = coluna;
         System.out.print("Digite o nome do personagem: ");
@@ -23,6 +25,7 @@ public abstract class Personagens {
         this.alcanceAtaque = alcanceAtaque;
         this.defesaBase = defesaBase;
         this.forcaDefesa = this.defesaBase;
+        this.p1 = p1;
         this.simbolo = simbolo;
     }
 
@@ -62,16 +65,20 @@ public abstract class Personagens {
         return simbolo;
     }
 
+    public boolean getP1() {
+        return p1;
+    }
+
     public boolean isSpecialAtivo() {
         return specialAtivo;
     }
-    
+
     protected void setPontosDeVida(int pontosDeVida) {
         if (pontosDeVida > 100)
             this.pontosDeVida = 100;
-        else if(pontosDeVida < 0)
+        else if (pontosDeVida < 0)
             this.pontosDeVida = 0;
-        else 
+        else
             this.pontosDeVida = pontosDeVida;
     }
 
@@ -109,9 +116,13 @@ public abstract class Personagens {
     protected void mover(char direcao) {
         switch (direcao) {
             case 'C' -> linha--; // trocados pois tabuleiro é
-            case 'B' -> linha++; // impresso invertido
+            case 'c' -> linha--; // impresso invertido
+            case 'B' -> linha++;
+            case 'b' -> linha++;
             case 'D' -> coluna++;
+            case 'd' -> coluna++;
             case 'E' -> coluna--;
+            case 'e' -> coluna--;
         }
     }
 
