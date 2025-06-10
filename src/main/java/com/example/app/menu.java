@@ -10,17 +10,17 @@ public class Menu {
         if(modoDeJogo == 3)
             return;
 
-        Jogo game = new Jogo();
-
+        Jogo game = new Jogo(modoDeJogo);
         int turnos = 1;
-        
-        if(modoDeJogo== 1){
+
+        if(modoDeJogo == 1){
+            
             while(game.getRender() && turnos <= 50){
                 
                 game.tabuleiro.imprimeTabuleiro();
                 game.tabuleiro.imprimeSituacao(game.player1, game.player2);
 
-                game.acao(game.player1, game.player2);
+                game.acao(game.player1, game.player2, false);
 
                 if (!game.getRender()) { // caso player 1 se renda
                     System.out.println(game.player1.getNome() + " se rendeu.");
@@ -32,20 +32,20 @@ public class Menu {
                     break;
                 }
 
-                game.acao(game.player2, game.player1);
+                game.acao(game.player2, game.player1, false);
 
                 if (game.player1.getPontosDeVida() == 0) {
                     System.out.println(game.player1.getNome() + " faleceu!!");
                     break;
                 }
+                turnos++;
             }
-        } else if(modoDeJogo== 2){
+        } else if(modoDeJogo == 2){
             while(game.getRender() && turnos <= 50){
-                
                 game.tabuleiro.imprimeTabuleiro();
                 game.tabuleiro.imprimeSituacao(game.player1, game.player2);
 
-                game.acao(game.player1, game.player2);
+                game.acao(game.player1, game.player2, false);
 
                 if (!game.getRender()) // caso player 1 se renda
                     break;
@@ -55,7 +55,7 @@ public class Menu {
                     break;
                 }
 
-                game.acao(game.player2, game.player1);
+                game.acao(game.player2, game.player1, true);
 
                 if (game.player1.getPontosDeVida() == 0) {
                     System.out.println(game.player1.getNome() + " faleceu!!");

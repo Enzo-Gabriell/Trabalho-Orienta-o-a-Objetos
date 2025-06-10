@@ -14,11 +14,10 @@ public abstract class Personagens {
     private boolean specialAtivo;
 
     public Personagens(int linha, int coluna, int forcaAtaque, int alcanceAtaque, int defesaBase, boolean isPlayer1,
-            char simbolo) {
+            char simbolo, String nome) {
         this.linha = linha;
         this.coluna = coluna;
-        System.out.print("Digite o nome do personagem: ");
-        this.nome = Jogo.sc.nextLine();
+        this.nome = nome;
         this.pontosDeVida = 100;
         this.specialAtivo = false;
         this.forcaAtaque = forcaAtaque;
@@ -71,6 +70,10 @@ public abstract class Personagens {
 
     public boolean isSpecialAtivo() {
         return specialAtivo;
+    }
+
+    public void setSpecialAtivo(boolean specialAtivo) {
+        this.specialAtivo = specialAtivo;
     }
 
     protected void setPontosDeVida(int pontosDeVida) {
