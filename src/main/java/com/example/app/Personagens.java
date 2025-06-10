@@ -1,61 +1,107 @@
 package com.example.app;
 
 public abstract class Personagens {
-    protected String nome;
-    protected int pontosDeVida;
-    protected int forcaAtaque;
-    protected int alcanceAtaque;
-    protected int defesaBase;
-    protected int forcaDefesa;
-    protected int linha;
-    protected int coluna;
-    protected char simbolo;
+    private String nome;
+    private int pontosDeVida;
+    private int forcaAtaque;
+    private int alcanceAtaque;
+    private int defesaBase;
+    private int forcaDefesa;
+    private int linha;
+    private int coluna;
+    private char simbolo;
+    private boolean specialAtivo;
 
-    public Personagens(int linha, int coluna) {
-        this.linha = linha; 
+    public Personagens(int linha, int coluna, int forcaAtaque, int alcanceAtaque, int defesaBase, char simbolo) {
+        this.linha = linha;
         this.coluna = coluna;
         System.out.print("Digite o nome do personagem: ");
         this.nome = Jogo.sc.nextLine();
         this.pontosDeVida = 100;
+        this.specialAtivo = false;
+        this.forcaAtaque = forcaAtaque;
+        this.alcanceAtaque = alcanceAtaque;
+        this.defesaBase = defesaBase;
+        this.forcaDefesa = this.defesaBase;
+        this.simbolo = simbolo;
     }
 
-    protected int getLinha() {
+    public String getNome() {
+        return nome;
+    }
+
+    public int getPontosDeVida() {
+        return pontosDeVida;
+    }
+
+    public int getForcaAtaque() {
+        return forcaAtaque;
+    }
+
+    public int getAlcanceAtaque() {
+        return alcanceAtaque;
+    }
+
+    public int getDefesaBase() {
+        return defesaBase;
+    }
+
+    public int getForcaDefesa() {
+        return forcaDefesa;
+    }
+
+    public int getLinha() {
         return linha;
     }
 
-    protected int getColuna() {
+    public int getColuna() {
         return coluna;
     }
-    
-    protected char getSimbolo() {
+
+    public char getSimbolo() {
         return simbolo;
     }
 
-    protected int atacar() {
-        return forcaAtaque; 
+    public boolean isSpecialAtivo() {
+        return specialAtivo;
+    }
+    
+    protected void setPontosDeVida(int pontosDeVida) {
+        if (pontosDeVida > 100)
+            this.pontosDeVida = 100;
+        else if(pontosDeVida < 0)
+            this.pontosDeVida = 0;
+        else 
+            this.pontosDeVida = pontosDeVida;
+    }
+
+    protected void setForcaAtaque(int forcaAtaque) {
+        this.forcaAtaque = forcaAtaque;
+    }
+
+    protected void setAlcanceAtaque(int alcanceAtaque) {
+        this.alcanceAtaque = alcanceAtaque;
     }
 
     protected void defender() {
         System.out.println(nome + " restaura força de defesa para " + defesaBase);
         forcaDefesa = defesaBase;
     }
-    
+
     protected void calculoDeDano(int ataque) {
-        if( forcaDefesa == 0 ) {
+        if (forcaDefesa == 0) {
             System.out.println(nome + " recebe " + ataque + " de dano!");
             pontosDeVida -= ataque;
-        }
-        else if( forcaDefesa > ataque) {
-            System.out.println(nome + " perde " + (forcaDefesa-ataque) + " de defesa!");
+        } else if (forcaDefesa > ataque) {
+            System.out.println(nome + " perde " + (forcaDefesa - ataque) + " de defesa!");
             forcaDefesa -= ataque;
-        }
-        else {
-            System.out.println(nome + " recebe " + (ataque-forcaDefesa) + " de dano!");
-            pontosDeVida += (forcaDefesa-ataque);
+        } else {
+            System.out.println(nome + " recebe " + (ataque - forcaDefesa) + " de dano!");
+            pontosDeVida += (forcaDefesa - ataque);
             forcaDefesa = 0;
         }
 
-        if(pontosDeVida < 0)
+        if (pontosDeVida < 0)
             pontosDeVida = 0;
         System.out.println();
     }
