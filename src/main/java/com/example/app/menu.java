@@ -5,22 +5,25 @@ public class Menu {
     Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+
+        int acao = Jogo.telaInical();
+
         Jogo game = new Jogo();
-        int turnos = 1, acao;
-        boolean rendicao = game.getRender();
 
-
-        acao = game.telaInical();
+        int turnos = 1;
+        
         if(acao == 1){
-            while(rendicao && turnos <= 50){
+            while(game.getRender() && turnos <= 50){
                 
                 game.tabuleiro.imprimeTabuleiro();
                 game.tabuleiro.imprimeSituacao(game.player1, game.player2);
 
                 game.acao(game.player1, game.player2);
 
-                if (!rendicao) // caso player 1 se renda
+                if (!game.getRender()) { // caso player 1 se renda
+                    System.out.println(game.player1.getNome() + " se rendeu.");
                     break;
+                }
 
                     if (game.player2.getPontosDeVida() == 0) {
                     System.out.println(game.player2.getNome() + " faleceu!!");
@@ -35,14 +38,14 @@ public class Menu {
                 }
             }
         } else if(acao == 2){
-            while(rendicao && turnos <= 50){
+            while(game.getRender() && turnos <= 50){
                 
                 game.tabuleiro.imprimeTabuleiro();
                 game.tabuleiro.imprimeSituacao(game.player1, game.player2);
 
                 game.acao(game.player1, game.player2);
 
-                if (!rendicao) // caso player 1 se renda
+                if (!game.getRender()) // caso player 1 se renda
                     break;
 
                     if (game.player2.getPontosDeVida() == 0) {

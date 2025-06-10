@@ -66,7 +66,7 @@ public class Jogo {
         this.player2 = inicializaPlayer(tipoPersonagem, false);
     }
 
-    protected int telaInical(){
+    protected static int telaInical(){
         int acao;
         System.out.println("\u001b[1m Duelo de Personagens! \u001b[0m");
         System.out.print("Jogar PvP(1) Jogar PvE(2) Sair do Jogo(3): ");
@@ -131,7 +131,7 @@ public class Jogo {
 
             if (!this.tabuleiro.validacaoDeMovimento(p, move))
                 System.out.println("Movimento inválido!! Tente novamente.");
-        } while(this.tabuleiro.validacaoDeMovimento(p, move));
+        } while(!this.tabuleiro.validacaoDeMovimento(p, move));
         
         int linhaAntiga = p.getLinha();
         int colunaAntiga = p.getColuna();
