@@ -2,8 +2,8 @@ package com.example.app;
 
 public class Mago extends Personagens {
 
-    public Mago(int linha, int coluna, boolean p1) {
-        super(linha, coluna, 10, 3, 7, p1, 'M');
+    public Mago(int linha, int coluna, boolean isPlayer1) {
+        super(linha, coluna, 10, 3, 7, isPlayer1, 'M');
     }
 
     @Override

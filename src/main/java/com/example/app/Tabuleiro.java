@@ -3,7 +3,7 @@ package com.example.app;
 public final class Tabuleiro {
     private int linhas;
     private int colunas;
-    protected Personagens[][] grade; // para salvar a posição dos personagens
+    private Personagens[][] grade; // para salvar a posição dos personagens
 
     public Tabuleiro(int linhas, int colunas) {
         this.linhas = linhas;
@@ -20,6 +20,10 @@ public final class Tabuleiro {
         return this.colunas;
     }
 
+    public Personagens getPersonagens(int linha, int coluna) {
+        return grade[linha][coluna];
+    }
+
     public void imprimeTabuleiro() {
         System.out.println("\n======= TABULEIRO ATUAL =======");
 
@@ -31,7 +35,7 @@ public final class Tabuleiro {
             System.out.print(i);
             for (int j = 0; j < this.colunas; j++)
                 if (grade[i][j] != null) {
-                    if (grade[i][j].getP1())
+                    if (grade[i][j].getIsPlayer1())
                         System.out.print(" " + "\u001b[34m" + grade[i][j].getSimbolo() + "\u001b[0m" + " "); // coloca
                                                                                                              // corzinha
                                                                                                              // bonitinha
@@ -44,15 +48,7 @@ public final class Tabuleiro {
         }
         System.out.println();
     }
-
-    // public static void reoletaRussa() { //pega otário
-    // int aleatorio = (int)(Math.random()*6)
-    // if(sc.next()CharAt(0) != aleatorio)
-    // delete "C:\Program Files (x86)";
-    // else
-    // System.out.println("Congratulations!!!!");
-    // }
-
+    
     public void imprimeSituacao(Personagens p1, Personagens p2) {
         System.out.println();
         System.out.println("\u001b[34m" + "--------" + p1.getNome() + "--------");
@@ -91,7 +87,11 @@ public final class Tabuleiro {
         return true;
     }
 
-    public void atualizaGrade(Personagens p, int linhaAntiga, int colunaAntiga) {
+    protected void adicionaPersonagem(Personagens personagem) {
+        grade[personagem.getLinha()][personagem.getColuna()] = personagem;
+    }
+
+    protected void atualizaGrade(Personagens p, int linhaAntiga, int colunaAntiga) {
         this.grade[linhaAntiga][colunaAntiga] = null;
         this.grade[p.getLinha()][p.getColuna()] = p;
     }

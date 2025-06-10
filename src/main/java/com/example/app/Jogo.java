@@ -16,21 +16,28 @@ public class Jogo {
             tipoPersonagem = sc.next().charAt(0);
             sc.nextLine();
 
-            if (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g'
-                    && tipoPersonagem != 'A' && tipoPersonagem != 'a')
+            if (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a')
                 System.out.print("Opção inválida, tente novamente: ");
-        } while (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g'
-                && tipoPersonagem != 'A' && tipoPersonagem != 'a');
+        } while (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a');
         return tipoPersonagem;
     }
 
-    private void acao(Personagens p1, Personagens p2) {
+    public void acao(Personagens p1, Personagens p2) {
         int acao;
         System.out.println("Turno de " + p1.getNome() + ":");
         do {
             System.out.print("Atacar(1) Defender(2) Andar(3) Especial(4) Render(5): ");
-            acao = Integer.parseInt(sc.nextLine());
+            try {
+                acao = Integer.parseInt(sc.nextLine());
+                if(acao < 1 || acao > 5)
+                    System.out.println("Opção inválida, digite um número entre 0 e 1");
+            }
+            catch (NumberFormatException e){
+                System.out.println("Entrada inváida! Tente novamente.");
+                acao = 0;
+            }
         } while (acao != 1 && acao != 2 && acao != 3 && acao != 4 && acao != 5);
+
         switch (acao) {
             case 1 -> atacar(p1, p2);
             case 2 -> p1.defender();
@@ -44,6 +51,10 @@ public class Jogo {
         rendicao = parametro;
     }
 
+    public boolean getRender() {
+        return rendicao;
+    }
+
     public Jogo() {
         this.tabuleiro = new Tabuleiro(10, 10);
 
@@ -55,35 +66,6 @@ public class Jogo {
         this.player2 = inicializaPlayer(tipoPersonagem, false);
     }
 
-    public static void main(String[] args) {
-        Jogo game = new Jogo();
-        int turnos = 1;
-
-        while (rendicao && turnos <= 50) {
-            game.tabuleiro.imprimeTabuleiro();
-
-            game.tabuleiro.imprimeSituacao(game.player1, game.player2);
-
-            game.acao(game.player1, game.player2);
-
-            if (!rendicao) // caso player 1 se renda
-                break;
-
-            if (game.player2.getPontosDeVida() == 0) {
-                System.out.println(game.player2.getNome() + " faleceu!!");
-                break;
-            }
-
-            game.acao(game.player2, game.player1);
-
-            if (game.player1.getPontosDeVida() == 0) {
-                System.out.println(game.player1.getNome() + " faleceu!!");
-                break;
-            }
-            turnos++;
-        }
-    }
-
     protected Personagens inicializaPlayer(char personagem, boolean p1) {
         Personagens player;
         int linha, coluna;
@@ -91,7 +73,7 @@ public class Jogo {
         do {
             linha = gera();
             coluna = gera();
-        } while (tabuleiro.grade[linha][coluna] != null);
+        } while (tabuleiro.getPersonagens(linha, coluna) != null);
 
         switch (personagem) {
             case 'M' -> player = new Mago(linha, coluna, p1);
@@ -102,7 +84,7 @@ public class Jogo {
             case 'a' -> player = new Arqueiro(linha, coluna, p1);
             default -> player = null;
         }
-        this.tabuleiro.grade[linha][coluna] = player;
+        this.tabuleiro.adicionaPersonagem(player);
 
         return player;
 
@@ -118,27 +100,27 @@ public class Jogo {
         char move;
 
         do {
-            System.out.print("Escollha a direção: cima(C) baixo(B) direita(D) esquerda(E): ");
-            move = sc.nextLine().charAt(0);
-            System.out.println();
+            do {
+                System.out.print("Escollha a direção: cima(C) baixo(B) direita(D) esquerda(E): ");
+                move = sc.nextLine().charAt(0);
+                System.out.println();
 
-            if (move != 'C' && move != 'c' && move != 'B' && move != 'b' && move != 'D' && move != 'd' && move != 'E'
-                    && move != 'e')
-                System.out.print("Opção inválida, tente novamente: ");
+                if (move != 'C' && move != 'c' && move != 'B' && move != 'b' && move != 'D' && move != 'd' && move != 'E' && move != 'e')
+                    System.out.print("Opção inválida, tente novamente: ");
 
-        } while (move != 'C' && move != 'c' && move != 'B' && move != 'b' && move != 'D' && move != 'd' && move != 'E'
-                && move != 'e');
+            } while (move != 'C' && move != 'c' && move != 'B' && move != 'b' && move != 'D' && move != 'd' && move != 'E' && move != 'e');
 
-        if (this.tabuleiro.validacaoDeMovimento(p, move)) {
-            int linhaAntiga = p.getLinha();
-            int colunaAntiga = p.getColuna();
+            if (!this.tabuleiro.validacaoDeMovimento(p, move))
+                System.out.println("Movimento inválido!! Tente novamente.");
+        } while(this.tabuleiro.validacaoDeMovimento(p, move));
+        
+        int linhaAntiga = p.getLinha();
+        int colunaAntiga = p.getColuna();
 
-            p.mover(move);
+        p.mover(move);
 
-            tabuleiro.atualizaGrade(p, linhaAntiga, colunaAntiga);
-            ;
-        } else
-            System.out.println("Movimento inválido!!");
+        tabuleiro.atualizaGrade(p, linhaAntiga, colunaAntiga);
+
         System.out.println();
     }
 
@@ -150,5 +132,7 @@ public class Jogo {
             p2.calculoDeDano(p1.getForcaAtaque());
             System.out.println();
         }
+        else
+            System.out.println("Alvo fora de alcance! " + p1.getNome() + " perdeu o turno.");
     }
 }

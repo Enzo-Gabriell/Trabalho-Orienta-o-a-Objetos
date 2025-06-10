@@ -10,10 +10,10 @@ public abstract class Personagens {
     private int linha;
     private int coluna;
     private char simbolo;
-    private boolean p1;
+    private boolean isPlayer1;
     private boolean specialAtivo;
 
-    public Personagens(int linha, int coluna, int forcaAtaque, int alcanceAtaque, int defesaBase, boolean p1,
+    public Personagens(int linha, int coluna, int forcaAtaque, int alcanceAtaque, int defesaBase, boolean isPlayer1,
             char simbolo) {
         this.linha = linha;
         this.coluna = coluna;
@@ -25,7 +25,7 @@ public abstract class Personagens {
         this.alcanceAtaque = alcanceAtaque;
         this.defesaBase = defesaBase;
         this.forcaDefesa = this.defesaBase;
-        this.p1 = p1;
+        this.isPlayer1 = isPlayer1;
         this.simbolo = simbolo;
     }
 
@@ -65,8 +65,8 @@ public abstract class Personagens {
         return simbolo;
     }
 
-    public boolean getP1() {
-        return p1;
+    public boolean getIsPlayer1() {
+        return isPlayer1;
     }
 
     public boolean isSpecialAtivo() {
