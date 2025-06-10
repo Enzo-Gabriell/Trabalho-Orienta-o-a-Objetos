@@ -51,8 +51,8 @@ public class Jogo {
                 case 4 -> game.player1.specialPower(game.player2);
             }
 
-            if(game.player2.pontosDeVida == 0) {
-                System.out.println(game.player2.nome + " faleceu!!");
+            if(game.player2.getPontosDeVida() == 0) {
+                System.out.println(game.player2.getNome() + " faleceu!!");
                 break;
             }
 
@@ -66,8 +66,8 @@ public class Jogo {
                 case 4 -> game.player2.specialPower(game.player1);
             }
 
-            if(game.player1.pontosDeVida == 0) {
-                    System.out.println(game.player1.nome + " faleceu!!");
+            if(game.player1.getPontosDeVida() == 0) {
+                    System.out.println(game.player1.getNome() + " faleceu!!");
                     break;
             }
         }
@@ -131,13 +131,9 @@ public class Jogo {
     protected void atacar(Personagens p1, Personagens p2) {
         if(Tabuleiro.validaAlcance(p1, p2)) {
             System.out.println();
-            System.out.println(p1.nome + " ataca " + p2.nome);
+            System.out.println(p1.getNome() + " ataca " + p2.getNome());
             System.out.println();
-            p2.calculoDeDano(p1.atacar());
+            p2.calculoDeDano(p1.getForcaAtaque());
         }
-    }
-
-    protected void specialPower(Personagens atacante, Personagens alvo) {
-        alvo.calculoDeDano(atacante.atacar());
     }
 }

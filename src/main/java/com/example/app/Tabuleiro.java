@@ -1,8 +1,8 @@
 package com.example.app;
 
 public final class Tabuleiro {
-    protected int linhas;
-    protected int colunas;
+    private int linhas;
+    private int colunas;
     protected Personagens[][] grade; // para salvar a posição dos personagens
 
     public Tabuleiro(int linhas, int colunas) {
@@ -14,6 +14,10 @@ public final class Tabuleiro {
 
     public int getLinhas() {
         return this.linhas;
+    }
+
+    public int getColunas() {
+        return this.colunas;
     }
 
     public void imprimeTabuleiro() {
@@ -37,15 +41,11 @@ public final class Tabuleiro {
 
     public void imprimeSituacao(Personagens p1, Personagens p2) {
         System.out.println();
-        System.out.println("----" + p1.nome + "----");
-        System.out.println("Vida: " + p1.pontosDeVida);
-        System.out.println("Dano de ataque: " + p1.forcaAtaque);
-        System.out.println("Escudo: " + p1.forcaDefesa);
+        System.out.println("----PLAYER 1----");
+        System.out.println("Vida: " + p1.getPontosDeVida());
         System.out.println();
-        System.out.println("----" + p2.nome + "----");
-        System.out.println("Vida: " + p2.pontosDeVida);
-        System.out.println("Dano de ataque: " + p2.forcaAtaque);
-        System.out.println("Escudo: " + p2.forcaDefesa);
+        System.out.println("----PLAYER 2----");
+        System.out.println("Vida: " + p2.getPontosDeVida());
         System.out.println();
     }
 
@@ -71,14 +71,14 @@ public final class Tabuleiro {
 
     public void atualizaGrade(Personagens p, int linhaAntiga, int colunaAntiga) {
         this.grade[linhaAntiga][colunaAntiga] = null;
-        this.grade[p.linha][p.coluna] = p;
+        this.grade[p.getLinha()][p.getColuna()] = p;
     }
 
     public static boolean validaAlcance(Personagens p1, Personagens p2) {
-        int max = Math.abs(p1.linha - p2.linha);
-        if(max < Math.abs(p1.coluna - p2.coluna))
-            max = Math.abs(p1.coluna - p2.coluna);
+        int max = Math.abs(p1.getLinha() - p2.getLinha());
+        if(max < Math.abs(p1.getColuna() - p2.getColuna()))
+            max = Math.abs(p1.getColuna() - p2.getColuna());
 
-        return p1.alcanceAtaque >= max;
+        return p1.getAlcanceAtaque() >= max;
     }
 }
