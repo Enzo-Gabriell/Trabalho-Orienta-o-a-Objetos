@@ -6,13 +6,15 @@ public class Menu {
 
     public static void main(String[] args) {
 
-        int acao = Jogo.telaInical();
+        int modoDeJogo = Jogo.telaInical();
+        if(modoDeJogo == 3)
+            return;
 
         Jogo game = new Jogo();
 
         int turnos = 1;
         
-        if(acao == 1){
+        if(modoDeJogo== 1){
             while(game.getRender() && turnos <= 50){
                 
                 game.tabuleiro.imprimeTabuleiro();
@@ -37,7 +39,7 @@ public class Menu {
                     break;
                 }
             }
-        } else if(acao == 2){
+        } else if(modoDeJogo== 2){
             while(game.getRender() && turnos <= 50){
                 
                 game.tabuleiro.imprimeTabuleiro();
