@@ -203,19 +203,24 @@ public class Jogo {
     }
 
     protected void andar(Personagens p1, Personagens p2, boolean ehBot) {
-        char move;
+        int move;
 
         if(!ehBot) {
             do {
                 do {
-                    System.out.print("Escollha a direção: cima(C) baixo(B) direita(D) esquerda(E): ");
-                    move = sc.nextLine().charAt(0);
-                    System.out.println();
+                    System.out.print("Escollha a direção: cima(1) baixo(2) direita(3) esquerda(4): ");
 
-                    if (move != 'C' && move != 'c' && move != 'B' && move != 'b' && move != 'D' && move != 'd' && move != 'E' && move != 'e')
-                        System.out.print("Opção inválida, tente novamente: ");
+                    try {
+                        move = Integer.parseInt(sc.nextLine());
+                        if(move < 1 || move > 4)
+                            System.out.println("Opção inválida, digite um número entre 1 e 5");
+                    }
+                    catch (NumberFormatException e){
+                        System.out.println("Entrada inváida! Tente novamente.");
+                        move = 0;
+                    }
 
-                } while (move != 'C' && move != 'c' && move != 'B' && move != 'b' && move != 'D' && move != 'd' && move != 'E' && move != 'e');
+                } while (move != 1 && move != 2 && move != 3 && move != 4);
 
                 if (!this.tabuleiro.validacaoDeMovimento(p1, move))
                     System.out.println("Movimento inválido!! Tente novamente.");

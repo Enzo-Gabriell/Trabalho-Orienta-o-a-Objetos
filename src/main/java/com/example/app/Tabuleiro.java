@@ -60,19 +60,15 @@ public final class Tabuleiro { // valida movimentação e alcance, além de impr
         System.out.println();
     }
 
-    public boolean validacaoDeMovimento(Personagens p, char move) {
+    public boolean validacaoDeMovimento(Personagens p, int move) {
         int proximaLinha = p.getLinha();
         int proximaColuna = p.getColuna();
 
         switch (move) {
-            case 'C' -> proximaLinha--; // linhas são imprimidas ao contrário
-            case 'c' -> proximaLinha--;
-            case 'B' -> proximaLinha++;
-            case 'b' -> proximaLinha++;
-            case 'D' -> proximaColuna++;
-            case 'd' -> proximaColuna++;
-            case 'E' -> proximaColuna--;
-            case 'e' -> proximaColuna--;
+            case 1 -> proximaLinha--; // linhas são imprimidas ao contrário
+            case 2 -> proximaLinha++;
+            case 3 -> proximaColuna++;
+            case 4 -> proximaColuna--;
         }
 
         if (proximaColuna > 9 || proximaColuna < 0 || proximaLinha > 9 || proximaLinha < 0)

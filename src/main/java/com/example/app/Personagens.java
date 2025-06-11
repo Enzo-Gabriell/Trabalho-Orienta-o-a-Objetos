@@ -116,16 +116,12 @@ public abstract class Personagens {
         System.out.println();
     }
 
-    protected void mover(char direcao) {
+    protected void mover(int direcao) {
         switch (direcao) {
-            case 'C' -> linha--; // trocados pois tabuleiro é
-            case 'c' -> linha--; // impresso invertido
-            case 'B' -> linha++;
-            case 'b' -> linha++;
-            case 'D' -> coluna++;
-            case 'd' -> coluna++;
-            case 'E' -> coluna--;
-            case 'e' -> coluna--;
+            case 1 -> linha--; // linhas são imprimidas ao contrário
+            case 2 -> linha++;
+            case 3 -> coluna++;
+            case 4 -> coluna--;
         }
     }
 
