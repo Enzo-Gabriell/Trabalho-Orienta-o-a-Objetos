@@ -107,7 +107,7 @@ public abstract class Personagens {
             forcaDefesa -= ataque;
         } else {
             System.out.println(nome + " recebe " + (ataque - forcaDefesa) + " de dano!");
-            pontosDeVida += (forcaDefesa - ataque);
+            pontosDeVida -= (ataque - forcaDefesa);
             forcaDefesa = 0;
         }
 

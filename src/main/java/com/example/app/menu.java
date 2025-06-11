@@ -10,11 +10,13 @@ public class Menu {
         while(jogarNovamente) {
             modoDeJogo = Jogo.telaInical();
             
-            if(modoDeJogo == 3) // caso jogador escolha sair
-                return;
+            if(modoDeJogo == 3)// caso jogador escolha sair
+                break;
         
             game = new Jogo(modoDeJogo);
             jogarNovamente = game.iniciar(modoDeJogo == 2);
         }
+        
+        System.out.println("OBRIGADO POR TER JOGADO!!!");
     }
 }

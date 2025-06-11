@@ -1,7 +1,7 @@
 package com.example.app;
 
 public class Bot { // responsavel pela lógica de decisão e movimentação do bot
-
+ 
     public int decideAcao(Personagens bot, Personagens player1) {
         if(bot.getSimbolo() == 'G' && !bot.isSpecialAtivo()) // caso o bot seja guerreio já ativa special de cara
             return 4;
@@ -18,16 +18,16 @@ public class Bot { // responsavel pela lógica de decisão e movimentação do b
             return 3;
     }
     
-    public char direcaoDeMovimento(Personagens bot, Personagens player1) {
+    public int direcaoDeMovimento(Personagens bot, Personagens player1) {
         if(Math.abs(bot.getLinha() - player1.getLinha()) > Math.abs(bot.getColuna() - player1.getColuna()))
             if(player1.getLinha() > bot.getLinha())
-                return 'B';
+                return 2;
             else
-                return 'C';
+                return 1;
         else
             if(player1.getColuna() > bot.getColuna())
-                return 'D';
+                return 3;
             else
-                return 'E';
+                return 4;
     }
 }

@@ -25,7 +25,7 @@ public final class Tabuleiro { // valida movimentação e alcance, além de impr
     }
 
     public void imprimeTabuleiro(int turno) {
-        System.out.println("\n======= " + turno + "° Turno =======");
+        System.out.println("\n========== " + turno + "° Turno ==========");
 
         for (int i = 0; i < this.colunas; i++)
             System.out.print("  " + i);

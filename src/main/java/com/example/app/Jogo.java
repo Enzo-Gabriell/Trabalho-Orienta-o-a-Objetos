@@ -1,7 +1,7 @@
 package com.example.app;
 
 import java.util.Scanner;
-
+ 
 public class Jogo {
     private boolean rendicao;
     protected Tabuleiro tabuleiro;
@@ -13,6 +13,8 @@ public class Jogo {
     public Jogo(int modoDeJogo) {
         this.tabuleiro = new Tabuleiro(10, 10);
         this.rendicao = true;
+
+        exibirStatusPersonagens(); // exibi informações sobre os personagens
 
         char tipoPersonagem;
         tipoPersonagem = selecionaPersonagem();
@@ -131,16 +133,52 @@ public class Jogo {
         return acao;
     }
 
+    // Coloque este novo método dentro da classe Jogo.java
+
+    private static void exibirStatusPersonagens() {
+        System.out.println("\n=============================================");
+        System.out.println("        CONHEÇA OS PERSONAGENS");
+        System.out.println("=============================================");
+
+     // Criando instâncias "modelo" para ler os status dinamicamente
+    Guerreiro guerreiroBase = new Guerreiro(0, 0, true, "");
+    Mago magoBase = new Mago(0, 0, true, "");
+    Arqueiro arqueiroBase = new Arqueiro(0, 0, true, "");
+
+    // --- GUERREIRO ---
+    System.out.println("\n\u001b[1m--- GUERREIRO (G) ---\u001b[0m");
+    System.out.println("Um combatente corpo a corpo robusto, com alto poder de ataque.");
+    System.out.printf("Vida: %-3d | Ataque: %-2d | Defesa: %-2d | Alcance: %d\n",
+            100, guerreiroBase.getForcaAtaque(), guerreiroBase.getDefesaBase(), guerreiroBase.getAlcanceAtaque());
+    System.out.println("Especial (Carga Brutal): Dobra a força de ataque.");
+
+    // --- MAGO ---
+    System.out.println("\n\u001b[1m--- MAGO (M) ---\u001b[0m");
+    System.out.println("Frágil, mas capaz de virar o jogo com sua magia arcana.");
+    System.out.printf("Vida: %-3d | Ataque: %-2d | Defesa: %-2d | Alcance: %d\n",
+            100, magoBase.getForcaAtaque(), magoBase.getDefesaBase(), magoBase.getAlcanceAtaque());
+    System.out.println("Especial (Trocar Vida): Troca seus pontos de vida com os do oponente.");
+
+    // --- ARQUEIRO ---
+    System.out.println("\n\u001b[1m--- ARQUEIRO (A) ---\u001b[0m");
+    System.out.println("Um especialista em ataques a longa distância. Seu especial não tem limite de usos.");
+    System.out.printf("Vida: %-3d | Ataque: %-2d | Defesa: %-2d | Alcance: %d\n",
+            100, arqueiroBase.getForcaAtaque(), arqueiroBase.getDefesaBase(), arqueiroBase.getAlcanceAtaque());
+    System.out.println("Especial (Flecha Precisa): Aumenta o alcance do seu ataque.");
+    
+    System.out.println("\n============================================");
+    }
+
     private char selecionaPersonagem() {
         char tipoPersonagem;
         System.out.print("Escolha o tipo de personagem, Mago(M), Guerreiro(G) e Arqueiro(A): ");
         do {
-            tipoPersonagem = sc.next().charAt(0);
+            tipoPersonagem = sc.next().toUpperCase().charAt(0);
             sc.nextLine();
 
-            if (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a')
+            if (tipoPersonagem != 'M' && tipoPersonagem != 'G' && tipoPersonagem != 'A')
                 System.out.print("Opção inválida, tente novamente: ");
-        } while (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a');
+        } while (tipoPersonagem != 'M' && tipoPersonagem != 'G' && tipoPersonagem != 'A');
         return tipoPersonagem;
     }
 
@@ -183,11 +221,8 @@ public class Jogo {
 
         switch (personagem) {
             case 'M' -> player = new Mago(linha, coluna, p1, nome);
-            case 'm' -> player = new Mago(linha, coluna, p1, nome);
             case 'G' -> player = new Guerreiro(linha, coluna, p1, nome);
-            case 'g' -> player = new Guerreiro(linha, coluna, p1, nome);
             case 'A' -> player = new Arqueiro(linha, coluna, p1, nome);
-            case 'a' -> player = new Arqueiro(linha, coluna, p1, nome);
             default -> player = null;
         }
         this.tabuleiro.adicionaPersonagem(player);
