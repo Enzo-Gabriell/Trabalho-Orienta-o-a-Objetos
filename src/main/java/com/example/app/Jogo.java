@@ -3,7 +3,7 @@ package com.example.app;
 import java.util.Scanner;
 
 public class Jogo {
-    private static boolean rendicao = true;
+    private boolean rendicao;
     protected Tabuleiro tabuleiro;
     protected Personagens player1;
     protected Personagens player2;
@@ -12,6 +12,7 @@ public class Jogo {
 
     public Jogo(int modoDeJogo) {
         this.tabuleiro = new Tabuleiro(10, 10);
+        this.rendicao = true;
 
         char tipoPersonagem;
         tipoPersonagem = selecionaPersonagem();
@@ -78,7 +79,6 @@ public class Jogo {
         return jogarNovamente;
     }
     
-
     protected static boolean telaFinal(String nome, boolean empate){
             int opcao;
             if(!empate) {
