@@ -39,6 +39,14 @@ public class Jogo {
         }
     }
 
+    private void setRender(boolean parametro) {
+        rendicao = parametro;
+    }
+
+    public boolean getRender() {
+        return rendicao;
+    }
+
     public boolean iniciar(boolean pve) {
         int turnos = 1;
         boolean jogarNovamente = false;
@@ -123,6 +131,19 @@ public class Jogo {
         return acao;
     }
 
+    private char selecionaPersonagem() {
+        char tipoPersonagem;
+        System.out.print("Escolha o tipo de personagem, Mago(M), Guerreiro(G) e Arqueiro(A): ");
+        do {
+            tipoPersonagem = sc.next().charAt(0);
+            sc.nextLine();
+
+            if (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a')
+                System.out.print("Opção inválida, tente novamente: ");
+        } while (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a');
+        return tipoPersonagem;
+    }
+
     public void acao(Personagens p1, Personagens p2, boolean ehBot) {
         int acao;
         System.out.println("Turno de " + p1.getNome() + ":");
@@ -151,27 +172,6 @@ public class Jogo {
         }
     }
 
-    private char selecionaPersonagem() {
-        char tipoPersonagem;
-        System.out.print("Escolha o tipo de personagem, Mago(M), Guerreiro(G) e Arqueiro(A): ");
-        do {
-            tipoPersonagem = sc.next().charAt(0);
-            sc.nextLine();
-
-            if (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a')
-                System.out.print("Opção inválida, tente novamente: ");
-        } while (tipoPersonagem != 'M' && tipoPersonagem != 'm' && tipoPersonagem != 'G' && tipoPersonagem != 'g' && tipoPersonagem != 'A' && tipoPersonagem != 'a');
-        return tipoPersonagem;
-    }
-
-    private void setRender(boolean parametro) {
-        rendicao = parametro;
-    }
-
-    public boolean getRender() {
-        return rendicao;
-    }
-
     protected Personagens inicializaPlayer(char personagem, boolean p1, String nome) {
         Personagens player;
         int linha, coluna;
@@ -179,7 +179,7 @@ public class Jogo {
         do {
             linha = gera(tabuleiro.getLinhas());
             coluna = gera(tabuleiro.getColunas());
-        } while (tabuleiro.getPersonagens(linha, coluna) != null);
+        } while (tabuleiro.getPersonagens(linha, coluna) != null); // garante que na linha e coluna sorteadas o tabuleiro esteja vazio
 
         switch (personagem) {
             case 'M' -> player = new Mago(linha, coluna, p1, nome);
@@ -196,7 +196,7 @@ public class Jogo {
 
     }
 
-    protected int gera(int intervalo) { // gera um número aleatório de 0 a intervalo para posições dos personagens
+    protected int gera(int intervalo) { // gera um número aleatório de 0 a intervalo
         int num = (int) (Math.random() * intervalo);
 
         return num;

@@ -6,7 +6,7 @@ public class Bot { // responsavel pela lógica de decisão e movimentação do b
         if(bot.getSimbolo() == 'G' && !bot.isSpecialAtivo()) // caso o bot seja guerreio já ativa special de cara
             return 4;
         else if(bot.getSimbolo() == 'M' && !bot.isSpecialAtivo() && (bot.getPontosDeVida() < (player1.getPontosDeVida() / 2) 
-        && bot.getPontosDeVida() < 30)) // caso seja mago ativa special se a vida for menos da metade da do oponente e tiver vida < 30
+        && bot.getPontosDeVida() <= 30)) // caso seja mago ativa special se a vida for menos da metade da do oponente e tiver vida < 30
             return 4;
         else if(Tabuleiro.validaAlcance(bot, player1)) // se der pra bater bate
             return 1;

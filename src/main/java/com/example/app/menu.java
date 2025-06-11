@@ -1,9 +1,6 @@
 package com.example.app;
-import java.util.Scanner;
 
 public class Menu {
-    Scanner sc = new Scanner(System.in);
-
     public static void main(String[] args) {
         boolean jogarNovamente = true;
         int modoDeJogo;
