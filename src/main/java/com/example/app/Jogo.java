@@ -81,7 +81,7 @@ public class Jogo {
             turnos++;
         }
 
-        if(turnos == 51)
+        if(turnos == 31)
             telaFinal(null, true);
 
         return jogarNovamente;
