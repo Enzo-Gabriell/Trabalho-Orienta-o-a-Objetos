@@ -27,20 +27,86 @@ public class Jogo {
         }
         else {
             botControlador = new Bot();
+            String nome_bot = "Mata noob"; 
             int tipo = gera(3); // gera numero aleatorio de 1 a 3, para selecionar personagem do bot
             if(tipo == 1)
-                player2 = inicializaPlayer('M', false, "Mata noob");
+                player2 = inicializaPlayer('M', false, nome_bot);
             else if(tipo == 2)
-                player2 = inicializaPlayer('G', false, "Mata noob");
+                player2 = inicializaPlayer('G', false, nome_bot);
             else if(tipo == 3)
-                player2 = inicializaPlayer('A', false, "Mata noob");
+                player2 = inicializaPlayer('A', false, nome_bot);
+        }
+    }
+
+    public boolean iniciar(boolean pve) {
+        int turnos = 1;
+        boolean jogarNovamente = false;
+
+        while(getRender() && turnos <= 30) {
+
+            tabuleiro.imprimeTabuleiro(turnos);
+            tabuleiro.imprimeSituacao(player1, player2);
+
+            acao(player1, player2, false);
+
+            if(!this.getRender()) {
+                jogarNovamente = telaFinal(player2.getNome(), false);
+                break;
+            }
+            if(this.player2.getPontosDeVida() <= 0) {
+                jogarNovamente = telaFinal(player1.getNome(), false);
+                break;
+            }
+
+            acao(player2, player1, pve);
+
+            if(!this.getRender()) {
+                jogarNovamente = telaFinal(player1.getNome(), false);
+                break;
+            }
+            if(this.player1.getPontosDeVida() <= 0) {
+                jogarNovamente = telaFinal(player2.getNome(), false);
+                break;
+            }
+
+            turnos++;
         }
 
+        if(turnos == 51)
+            telaFinal(null, true);
+
+        return jogarNovamente;
     }
+    
+
+    protected static boolean telaFinal(String nome, boolean empate){
+            int opcao;
+            if(!empate) {
+                System.out.println("\u001b[1m O jogador "+ nome + " ganhou!!! \u001b[0m");
+                System.out.println();
+            }
+            else
+                System.out.println("\u001b[1m Empate!!! \u001b[0m");
+
+            System.out.println();
+            System.out.print("Jogar de novo(1) Sair do Jogo(2): ");
+            do {
+                try {
+                    opcao = Integer.parseInt(sc.nextLine());
+                    if(opcao < 1 || opcao > 2)
+                        System.out.print("Opção inválida, digite 1 ou 2: ");
+                }
+                catch (NumberFormatException e){
+                    System.out.print("Entrada inváida! Tente novamente: ");
+                    opcao = 0;
+                }
+            } while (opcao != 1 && opcao != 2);
+            return opcao == 1;
+     }
 
     protected static int telaInical(){
         int acao;
-        System.out.println("\u001b[1m Duelo de Personagens! \u001b[0m");
+        System.out.println("\033[H\033[2J \u001b[1m Duelo de Personagens! \u001b[0m");
         System.out.print("Jogar PvP(1) Jogar PvE(2) Sair do Jogo(3): ");
         do{
             try {
@@ -66,7 +132,7 @@ public class Jogo {
                 try {
                     acao = Integer.parseInt(sc.nextLine());
                     if(acao < 1 || acao > 5)
-                        System.out.println("Opção inválida, digite um número entre 0 e 1");
+                        System.out.println("Opção inválida, digite um número entre 1 e 5");
                 }
                 catch (NumberFormatException e){
                     System.out.println("Entrada inváida! Tente novamente.");
@@ -155,8 +221,10 @@ public class Jogo {
                     System.out.println("Movimento inválido!! Tente novamente.");
             } while(!this.tabuleiro.validacaoDeMovimento(p1, move));
         }
-        else 
+        else {
             move = botControlador.direcaoDeMovimento(p1, p2);
+            System.out.println(p1.getNome() + " andou");
+        }
         
         int linhaAntiga = p1.getLinha();
         int colunaAntiga = p1.getColuna();
