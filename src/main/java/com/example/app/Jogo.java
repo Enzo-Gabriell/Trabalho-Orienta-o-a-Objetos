@@ -29,7 +29,7 @@ public class Jogo {
         else {
             botControlador = new Bot();
             String nome_bot = "Mata noob"; 
-            int tipo = gera(3); // gera numero aleatorio de 1 a 3, para selecionar personagem do bot
+            int tipo = gera(3) + 1; // gera numero aleatorio de 1 a 3, para selecionar personagem do bot
             if(tipo == 1)
                 player2 = inicializaPlayer('M', false, nome_bot);
             else if(tipo == 2)
