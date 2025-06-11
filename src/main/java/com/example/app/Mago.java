@@ -13,7 +13,7 @@ public class Mago extends Personagens {
             int aux = getPontosDeVida();
             setPontosDeVida(alvo.getPontosDeVida());
             alvo.setPontosDeVida(aux);
-            setSpecialAtivo(true);
+            setSpecialAtivo();
         } else
             System.out.println(getNome() + " já ativou Trocar vida nessa partida");
     }

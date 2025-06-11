@@ -11,7 +11,7 @@ public class Guerreiro extends Personagens {
         if (!isSpecialAtivo()) {
             System.out.println(getNome() + " ativa Carga Brutal");
             setForcaAtaque(getForcaAtaque() * 2);
-            setSpecialAtivo(true);
+            setSpecialAtivo();
         } else
             System.out.println(getNome() + " já está com Carga Brutal ativa");
     }

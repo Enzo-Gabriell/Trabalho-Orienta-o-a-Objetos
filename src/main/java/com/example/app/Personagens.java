@@ -72,8 +72,8 @@ public abstract class Personagens {
         return specialAtivo;
     }
 
-    public void setSpecialAtivo(boolean specialAtivo) {
-        this.specialAtivo = specialAtivo;
+    public void setSpecialAtivo() {
+        this.specialAtivo = true;
     }
 
     protected void setPontosDeVida(int pontosDeVida) {
